@@ -1,7 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Drama Pick</title>
+<style>
+body{
+background:#141414;
+color:white;
+font-family:Arial,sans-serif;
+padding:30px;
+}
+h1{
+color:#E50914;
+}
+button{
+background:#E50914;
+color:white;
+border:none;
+padding:10px 15px;
+margin:5px;
+cursor:pointer;
+border-radius:5px;
+}
+.card{
+background:#222;
+padding:15px;
+margin:10px 0;
+border-radius:10px;
+cursor:pointer;
+}
+#detail{
+margin-top:20px;
+padding:20px;
+background:#222;
+border-radius:10px;
+}
+</style>
+</head>
 <body>
-<h1>드라마 추천기</h1>
-<p>사이트 연결 성공!</p>
+
+<h1>🎬 오늘 뭐 보지?</h1>
+
+<button onclick="showGenre('romance')">로맨스</button>
+<button onclick="showGenre('thriller')">스릴러</button>
+
+<div id="list"></div>
+<div id="detail"></div>
+
+<script>
+
+const dramas = {
+romance:[
+{
+title:"선재 업고 튀어",
+actor:"변우석, 김혜윤",
+rating:"4.8",
+story:"첫사랑을 살리기 위해 시간을 거슬러 가는 청춘 로맨스."
+},
+{
+title:"눈물의 여왕",
+actor:"김수현, 김지원",
+rating:"4.7",
+story:"위기를 맞은 부부가 사랑을 회복하는 이야기."
+}
+],
+thriller:[
+{
+title:"시그널",
+actor:"이제훈, 김혜수, 조진웅",
+rating:"4.9",
+story:"과거와 현재를 잇는 무전기로 미제 사건을 해결한다."
+},
+{
+title:"악의 꽃",
+actor:"이준기, 문채원",
+rating:"4.8",
+story:"비밀을 숨긴 남편과 형사의 이야기."
+}
+]
+};
+
+function showGenre(g){
+let html="";
+dramas[g].forEach(d=>{
+html += `
+<div class="card" onclick='showDetail(${JSON.stringify(d)})'>
+${d.title}
+</div>
+`;
+});
+document.getElementById("list").innerHTML=html;
+}
+
+function showDetail(d){
+document.getElementById("detail").innerHTML=
+`
+<h2>${d.title}</h2>
+<p>👥 ${d.actor}</p>
+<p>⭐ ${d.rating}</p>
+<p>${d.story}</p>
+`;
+}
+
+</script>
+
 </body>
 </html>
