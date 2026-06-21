@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오늘 뭐 보지? 드라마 추천기</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffe6f0, #e6f0ff);
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    background: white;
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #ff4d88;
+}
+
+select, button {
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #ff4d88;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#result {
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.drama-title {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎬 오늘 뭐 보지?</h1>
+
+<p>좋아하는 장르를 선택하세요!</p>
+
+<select id="genre">
+    <option value="romance">로맨스</option>
+    <option value="thriller">스릴러</option>
+    <option value="comedy">코미디</option>
+    <option value="fantasy">판타지</option>
+    <option value="crime">범죄/수사</option>
+</select>
+
+<br>
+
+<button onclick="recommendDrama()">추천받기</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const dramas = {
+
+romance: [
+{
+title: "선재 업고 튀어",
+desc: "첫사랑을 구하기 위한 타임슬립 로맨스"
+},
+{
+title: "눈물의 여왕",
+desc: "위기의 부부가 사랑을 되찾는 이야기"
+},
+{
+title: "갯마을 차차차",
+desc: "따뜻한 바닷마을 힐링 로맨스"
+}
+],
+
+thriller: [
+{
+title: "악의 꽃",
+desc: "숨겨진 비밀과 충격적인 진실"
+},
+{
+title: "시그널",
+desc: "과거와 현재를 연결하는 수사극"
+},
+{
+title: "괴물",
+desc: "연쇄살인 사건을 둘러싼 심리 스릴러"
+}
+],
+
+comedy: [
+{
+title: "으라차차 와이키키",
+desc: "웃음이 끊이지 않는 청춘 코미디"
+},
+{
+title: "극한직업",
+desc: "코믹한 수사 이야기"
+},
+{
+title: "김비서가 왜 그럴까",
+desc: "달콤한 오피스 로맨틱 코미디"
+}
+],
+
+fantasy: [
+{
+title: "도깨비",
+desc: "불멸의 삶을 사는 도깨비 이야기"
+},
+{
+title: "호텔 델루나",
+desc: "귀신 전용 호텔의 신비한 이야기"
+},
+{
+title: "환혼",
+desc: "영혼이 바뀌는 판타지 액션"
+}
+],
+
+crime: [
+{
+title: "비밀의 숲",
+desc: "검찰 내부 비리를 파헤치는 수사극"
+},
+{
+title: "모범택시",
+desc: "억울한 피해자를 대신해 복수한다"
+},
+{
+title: "열혈사제",
+desc: "통쾌한 범죄 수사 드라마"
+}
+]
+
+};
+
+function recommendDrama() {
+
+const genre = document.getElementById("genre").value;
+
+const selected = dramas[genre];
+
+const randomDrama =
+selected[Math.floor(Math.random() * selected.length)];
+
+document.getElementById("result").innerHTML = `
+<h2>✨ 추천 결과 ✨</h2>
+<div class="drama-title">${randomDrama.title}</div>
+<p>${randomDrama.desc}</p>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
