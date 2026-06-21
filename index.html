@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Drama Pick</title>
 <style>
 body{
@@ -12,15 +13,16 @@ padding:30px;
 }
 h1{
 color:#E50914;
+text-align:center;
 }
-button{
+.genre{
 background:#E50914;
 color:white;
 border:none;
-padding:10px 15px;
+padding:12px 18px;
 margin:5px;
 cursor:pointer;
-border-radius:5px;
+border-radius:6px;
 }
 .card{
 background:#222;
@@ -28,6 +30,9 @@ padding:15px;
 margin:10px 0;
 border-radius:10px;
 cursor:pointer;
+}
+.card:hover{
+background:#333;
 }
 #detail{
 margin-top:20px;
@@ -39,10 +44,15 @@ border-radius:10px;
 </head>
 <body>
 
-<h1>🎬 오늘 뭐 보지?</h1>
+<h1>🎬 Drama Pick</h1>
 
-<button onclick="showGenre('romance')">로맨스</button>
-<button onclick="showGenre('thriller')">스릴러</button>
+<div style="text-align:center;">
+<button class="genre" onclick="showGenre('romance')">로맨스</button>
+<button class="genre" onclick="showGenre('thriller')">스릴러</button>
+<button class="genre" onclick="showGenre('comedy')">코미디</button>
+<button class="genre" onclick="showGenre('fantasy')">판타지</button>
+<button class="genre" onclick="showGenre('crime')">범죄/수사</button>
+</div>
 
 <div id="list"></div>
 <div id="detail"></div>
@@ -50,59 +60,68 @@ border-radius:10px;
 <script>
 
 const dramas = {
+
 romance:[
-{
-title:"선재 업고 튀어",
-actor:"변우석, 김혜윤",
-rating:"4.8",
-story:"첫사랑을 살리기 위해 시간을 거슬러 가는 청춘 로맨스."
-},
-{
-title:"눈물의 여왕",
-actor:"김수현, 김지원",
-rating:"4.7",
-story:"위기를 맞은 부부가 사랑을 회복하는 이야기."
-}
+{title:"선재 업고 튀어",actor:"변우석, 김혜윤",rating:"4.8",story:"첫사랑을 살리기 위해 시간을 거슬러 가는 청춘 로맨스."},
+{title:"눈물의 여왕",actor:"김수현, 김지원",rating:"4.7",story:"위기를 맞은 부부가 사랑을 회복하는 이야기."},
+{title:"사랑의 불시착",actor:"현빈, 손예진",rating:"4.9",story:"패러글라이딩 사고로 북한에 떨어진 재벌 상속녀 이야기."},
+{title:"갯마을 차차차",actor:"신민아, 김선호",rating:"4.7",story:"바닷마을에서 펼쳐지는 따뜻한 로맨스."},
+{title:"김비서가 왜 그럴까",actor:"박서준, 박민영",rating:"4.6",story:"완벽한 부회장과 비서의 로맨틱 코미디."}
 ],
+
 thriller:[
-{
-title:"시그널",
-actor:"이제훈, 김혜수, 조진웅",
-rating:"4.9",
-story:"과거와 현재를 잇는 무전기로 미제 사건을 해결한다."
-},
-{
-title:"악의 꽃",
-actor:"이준기, 문채원",
-rating:"4.8",
-story:"비밀을 숨긴 남편과 형사의 이야기."
-}
+{title:"시그널",actor:"이제훈, 김혜수, 조진웅",rating:"4.9",story:"과거와 현재를 잇는 무전기로 사건을 해결한다."},
+{title:"악의 꽃",actor:"이준기, 문채원",rating:"4.8",story:"비밀을 숨긴 남편과 형사의 이야기."},
+{title:"괴물",actor:"신하균, 여진구",rating:"4.8",story:"연쇄살인 사건의 진실을 추적한다."},
+{title:"마우스",actor:"이승기, 이희준",rating:"4.7",story:"사이코패스를 둘러싼 충격적인 이야기."},
+{title:"보이스",actor:"장혁, 이하나",rating:"4.6",story:"112 신고센터를 배경으로 한 범죄 스릴러."}
+],
+
+comedy:[
+{title:"으라차차 와이키키",actor:"김정현, 이이경",rating:"4.8",story:"게스트하우스 청춘들의 코믹한 이야기."},
+{title:"쌈 마이웨이",actor:"박서준, 김지원",rating:"4.7",story:"청춘들의 성장과 사랑 이야기."},
+{title:"고백부부",actor:"손호준, 장나라",rating:"4.7",story:"후회 가득한 부부의 타임슬립."},
+{title:"멜로가 체질",actor:"천우희, 안재홍",rating:"4.8",story:"30대 친구들의 현실 공감 이야기."},
+{title:"열혈사제",actor:"김남길, 이하늬",rating:"4.8",story:"통쾌한 정의 구현 코미디."}
+],
+
+fantasy:[
+{title:"도깨비",actor:"공유, 김고은",rating:"4.9",story:"불멸의 삶을 사는 도깨비 이야기."},
+{title:"호텔 델루나",actor:"아이유, 여진구",rating:"4.8",story:"귀신 전용 호텔의 신비한 이야기."},
+{title:"환혼",actor:"이재욱, 정소민",rating:"4.8",story:"영혼이 바뀌는 판타지 액션."},
+{title:"W",actor:"이종석, 한효주",rating:"4.7",story:"웹툰 세계와 현실이 연결된다."},
+{title:"더 킹: 영원의 군주",actor:"이민호, 김고은",rating:"4.6",story:"평행세계를 넘나드는 판타지."}
+],
+
+crime:[
+{title:"비밀의 숲",actor:"조승우, 배두나",rating:"4.9",story:"검찰 내부 비리를 파헤친다."},
+{title:"모범택시",actor:"이제훈, 표예진",rating:"4.8",story:"억울한 피해자를 대신해 복수한다."},
+{title:"터널",actor:"최진혁, 윤현민",rating:"4.8",story:"과거 형사가 미래로 이동한다."},
+{title:"라이프 온 마스",actor:"정경호, 박성웅",rating:"4.8",story:"1988년으로 가게 된 형사 이야기."},
+{title:"검법남녀",actor:"정재영, 정유미",rating:"4.6",story:"법의학자와 검사의 공조 수사."}
 ]
+
 };
 
 function showGenre(g){
 let html="";
 dramas[g].forEach(d=>{
-html += `
-<div class="card" onclick='showDetail(${JSON.stringify(d)})'>
-${d.title}
-</div>
-`;
+html += `<div class="card" onclick='showDetail(${JSON.stringify(d)})'>${d.title}</div>`;
 });
 document.getElementById("list").innerHTML=html;
+document.getElementById("detail").innerHTML="";
 }
 
 function showDetail(d){
 document.getElementById("detail").innerHTML=
 `
 <h2>${d.title}</h2>
-<p>👥 ${d.actor}</p>
-<p>⭐ ${d.rating}</p>
-<p>${d.story}</p>
+<p>👥 주연: ${d.actor}</p>
+<p>⭐ 평점: ${d.rating}</p>
+<p>📝 ${d.story}</p>
 `;
 }
 
 </script>
-
 </body>
 </html>
